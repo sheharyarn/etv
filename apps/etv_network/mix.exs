@@ -9,6 +9,7 @@ defmodule ETV.Network.MixProject do
       config_path: "../../config/config.exs",
       deps_path: "../../deps",
       lockfile: "../../mix.lock",
+      elixirc_paths: elixirc_paths(Mix.env),
       elixir: "~> 1.6",
       start_permanent: Mix.env() == :prod,
       deps: deps()
@@ -16,19 +17,24 @@ defmodule ETV.Network.MixProject do
   end
 
 
-  # Run "mix help compile.app" to learn about applications.
+  # Application
   def application do
-    [
-      extra_applications: [:logger]
-    ]
+    [extra_applications: [:logger]]
   end
 
 
-  # Run "mix help deps" to learn about dependencies.
+  # Dependencies
   defp deps do
     [
       {:httpoison, "~> 1.2.0"},
       {:jason,     "~> 1.1.0"},
+      {:bypass,    "~> 0.8", only: :test},
     ]
   end
+
+
+  # Compilation Paths
+  defp elixirc_paths(:test), do: ["lib", "test/support"]
+  defp elixirc_paths(_),     do: ["lib"]
+
 end

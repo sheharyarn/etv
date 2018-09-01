@@ -31,11 +31,18 @@ defmodule ETV.Network.Ethplorer.Request do
   Handle a HTTPoison request response
 
   Returns the parsed JSON response if the status code is between
-  200 & 300, otherwise an error tuple.
+  200 & 300, otherwise an error tuple. Will also return error if
+  an error message is returned from the Ethplorer API.
   """
   def handle_response({:ok, %{status_code: code, body: body}})
   when code >= 200 and code < 300 do
-    {:ok, parse_body(body)}
+    case parse_body(body) do
+      %{error: %{message: message}} ->
+        {:error, {:ethplorer, message}}
+
+      body ->
+        {:ok, body}
+    end
   end
 
   def handle_response({:ok, %{status_code: code}}) do
