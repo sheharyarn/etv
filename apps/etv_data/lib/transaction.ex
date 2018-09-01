@@ -49,4 +49,17 @@ defmodule ETV.Data.Transaction do
   end
 
 
+
+  @doc """
+  Find or insert a transaction by its hash
+  (Will cause race conditions)
+  """
+  def getsert(hash) do
+    case get_by(tx_hash: hash) do
+      nil -> insert(tx_hash: hash)
+      tx  -> {:ok, tx}
+    end
+  end
+
+
 end

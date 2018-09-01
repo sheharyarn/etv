@@ -1,1 +1,22 @@
 /* This file is for your main application css. */
+
+.tx-lookup.jumbotron {
+  padding: 20px 40px 15px 40px !important;
+}
+
+.tx-lookup input[type="text"] {
+  width: 100%;
+  height: 35px;
+  text-align: center;
+}
+
+.tx-lookup button[type="submit"] {
+  height: 35px;
+  margin-top: 10px;
+}
+
+
+.tx-hash {
+  font-family: monospace;
+}
+

@@ -9,18 +9,17 @@ defmodule ETV.Web.Router do
     plug :put_secure_browser_headers
   end
 
+
   pipeline :api do
     plug :accepts, ["json"]
   end
 
-  scope "/", ETV.Web do
-    pipe_through :browser # Use the default browser stack
 
-    get "/", PageController, :index
+  scope "/", ETV.Web do
+    pipe_through :browser
+
+    get  "/",   PageController, :index
+    post "/tx", PageController, :create
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", ETV.Web do
-  #   pipe_through :api
-  # end
 end
