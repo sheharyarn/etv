@@ -5,3 +5,8 @@ use Mix.Config
 config :etv_web, ETV.Web.Endpoint,
   http: [port: 4001],
   server: false
+
+
+config :logger,
+  level: :error
+

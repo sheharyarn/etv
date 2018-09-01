@@ -1,4 +1,4 @@
-defmodule ETV.Web.ConnCase do
+defmodule Tests.Support.ConnCase do
   @moduledoc """
   This module defines the test case to be used by
   tests that require setting up a connection.
@@ -27,7 +27,8 @@ defmodule ETV.Web.ConnCase do
   end
 
 
-  setup _tags do
+  setup tags do
+    Tests.Support.Ecto.setup(tags)
     {:ok, conn: Phoenix.ConnTest.build_conn()}
   end
 
