@@ -11,12 +11,13 @@ defmodule ETV.Data.MixProject do
       lockfile: "../../mix.lock",
       elixir: "~> 1.6",
       start_permanent: Mix.env() == :prod,
+      elixirc_paths: elixirc_paths(Mix.env),
       deps: deps()
     ]
   end
 
 
-  # Run "mix help compile.app" to learn about applications.
+  # Application
   def application do
     [
       extra_applications: [:logger],
@@ -25,7 +26,7 @@ defmodule ETV.Data.MixProject do
   end
 
 
-  # Run "mix help deps" to learn about dependencies.
+  # Dependencies
   defp deps do
     [
       {:ecto,      "~> 2.2.9"},
@@ -34,4 +35,10 @@ defmodule ETV.Data.MixProject do
       {:postgrex,  ">= 0.0.0"},
     ]
   end
+
+
+  # Compilation Paths
+  defp elixirc_paths(:test), do: ["lib", "test/support"]
+  defp elixirc_paths(_),     do: ["lib"]
+
 end
