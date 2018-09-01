@@ -44,11 +44,11 @@ defmodule Tests.ETV.Data.Transaction do
   describe "#unconfirmed" do
     setup do
       txs = [
-        %Transaction{tx_hash: build_hash(1), status: :pending},
-        %Transaction{tx_hash: build_hash(2), status: :pending},
-        %Transaction{tx_hash: build_hash(3), status: :complete},
-        %Transaction{tx_hash: build_hash(4), status: :pending},
-        %Transaction{tx_hash: build_hash(5), status: :complete},
+        %Transaction{tx_hash: Support.TX.build_hash(1), status: :pending},
+        %Transaction{tx_hash: Support.TX.build_hash(2), status: :pending},
+        %Transaction{tx_hash: Support.TX.build_hash(3), status: :complete},
+        %Transaction{tx_hash: Support.TX.build_hash(4), status: :pending},
+        %Transaction{tx_hash: Support.TX.build_hash(5), status: :complete},
       ]
 
       Enum.each(txs, &Transaction.insert!/1)
@@ -64,25 +64,5 @@ defmodule Tests.ETV.Data.Transaction do
 
   end
 
-
-
-
-
-  # Private Helpers
-  # ---------------
-
-  @base    16
-  @length  64
-  @default "0"
-  @prefix  "0x"
-
-  defp build_hash(integer) do
-    hex =
-      integer
-      |> Integer.to_string(@base)
-      |> String.pad_leading(@length, @default)
-
-    @prefix <> hex
-  end
 
 end
